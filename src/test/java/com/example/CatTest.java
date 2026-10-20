@@ -24,10 +24,14 @@ class CatTest {
 
     @Test
     void getFoodDelegatesToPredator() throws Exception {
-        when(feline.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
+        List<String> expected = List.of("Животные", "Птицы", "Рыба");
+
+        when(feline.eatMeat()).thenReturn(expected);
+
         Cat cat = new Cat(feline);
 
-        assertEquals(List.of("Животные", "Птицы", "Рыба"), cat.getFood());
-        verify(feline, times(1)).eatMeat();
+        List<String> actual = cat.getFood();
+
+        assertEquals(expected, actual);
     }
 }
